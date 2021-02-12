@@ -1,0 +1,27 @@
+plugins {
+    id 'java-library'
+    id 'kotlin'
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation project(':libnavannotation')
+    implementation 'com.alibaba:fastjson:1.2.73'
+    //api 'com.google.auto.service:auto-service:1.0-rc4'
+    //implementation 'com.google.code.gson:gson:2.8.6'
+    //noinspection AnnotationProcessorOnCompilePath
+    implementation 'com.google.auto.service:auto-service:1.0-rc6'
+
+    //auto service
+    annotationProcessor 'com.google.auto.service:auto-service:1.0-rc6'
+}

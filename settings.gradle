@@ -1,0 +1,6 @@
+include ':libnetwork'
+include ':libcommon'
+include ':libnavcompiler'
+include ':libnavannotation'
+include ':app'
+rootProject.name = "VideoJoke"
