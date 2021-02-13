@@ -1,7 +1,6 @@
-package com.will.videojoke.utils
+package com.will.libcommon
 
 import android.app.Application
-import java.lang.reflect.InvocationTargetException
 
 object AppGlobals {
     private var sApplication: Application? = null

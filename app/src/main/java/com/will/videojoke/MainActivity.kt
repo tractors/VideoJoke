@@ -12,6 +12,10 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.alibaba.fastjson.JSONObject
+import com.will.libnetwork.ApiResponse
+import com.will.libnetwork.GetRequest
+import com.will.libnetwork.JsonCallback
 import com.will.videojoke.utils.NavGraphBuilder
 
 class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
@@ -34,6 +38,16 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         NavGraphBuilder.build(navController!!,this, fragment!!.id)
 
         navView.setOnNavigationItemSelectedListener(this)
+
+        val request = GetRequest<JSONObject>("www.mooc.com")
+        request.execute()
+
+        request.execute(object : JsonCallback<JSONObject>(){
+            override fun onSuccess(response: ApiResponse<JSONObject>) {
+                super.onSuccess(response)
+
+            }
+        })
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {

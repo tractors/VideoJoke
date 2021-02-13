@@ -1,0 +1,53 @@
+package com.will.libnetwork.cache
+
+import java.io.ByteArrayInputStream
+import java.io.ByteArrayOutputStream
+import java.io.ObjectInputStream
+import java.io.ObjectOutputStream
+
+object CacheManager {
+
+
+    /**
+     * 序列化存储，将数据转为二进制
+     */
+    private fun <T> toByteArray(body:T) : ByteArray{
+        val baos = ByteArrayOutputStream()
+        ObjectOutputStream(baos).use {
+            it.writeObject(body)
+            it.flush()
+            return baos.toByteArray()
+        }
+    }
+    /**
+     * 缓存数据
+     */
+    fun<T>save(key: String, body: T){
+        val cache = Cache()
+        cache.key = key
+        cache.data = toByteArray(body)
+        CacheDatabase.get().getCache().save(cache)
+    }
+
+    /**
+     * 获取指定 key 的缓存
+     */
+    fun getCache(key: String) : Any?{
+        val cache = CacheDatabase.get().getCache().getCache(key)
+        if (cache?.data != null){
+            return toObject(cache.data!!)
+        }
+
+        return null
+    }
+
+    /**
+     * 反序列，把二进制转成 java object 对象
+     */
+    private fun toObject(data: ByteArray): Any? {
+        val bais = ByteArrayInputStream(data)
+        ObjectInputStream(bais).use {
+            return it.readObject()
+        }
+    }
+}

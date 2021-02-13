@@ -4,7 +4,7 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.will.videojoke.model.BottomBar
 import com.will.videojoke.model.Destination
-import com.will.videojoke.utils.AppGlobals.getApplication
+import com.will.libcommon.AppGlobals.getApplication
 import java.io.BufferedReader
 import java.io.InputStream
 import java.io.InputStreamReader

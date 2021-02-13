@@ -55,7 +55,7 @@ dependencies {
 
     //gson 解析
     api 'com.google.code.gson:gson:2.8.6'
-    api "com.alibaba:fastjson:1.2.59"
+    api ("com.alibaba:fastjson:1.2.73")
     //网络库
 
     api("com.squareup.okhttp3:okhttp:4.9.0")
