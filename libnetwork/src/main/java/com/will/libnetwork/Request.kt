@@ -245,7 +245,7 @@ abstract class Request<T,R : Request<T,R>> (private var mUrl : String) : Cloneab
     }
 
     @Throws(CloneNotSupportedException::class)// 克隆失败抛出异常
-    override fun clone(): Request<T,R> {
+    public override fun clone(): Request<T,R> {
         return super.clone() as Request<T, R>
     }
 }

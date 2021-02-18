@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="feed"
+            type="Feed" />
+        <import type="com.will.videojoke.model.Feed"/>
+        <import type="com.will.videojoke.utils.StringConvert"/>
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_45"
+        android:paddingStart="@dimen/dp_16"
+        android:paddingEnd="@dimen/dp_16"
+        android:orientation="horizontal">
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textSize="@dimen/sp_14"
+            app:iconGravity="textStart"
+            app:iconPadding="@dimen/dp_4"
+            app:backgroundTint="@color/white"
+            android:text="@{feed.ugc.likeCount>0?StringConvert.convertFeedUgc(feed.ugc.likeCount):null}"
+            android:textColor="@{feed.ugc.hasLiked?@color/color_theme:@color/color_3d3}"
+            app:icon="@{feed.ugc.hasLiked?@drawable/icon_cell_liked:@drawable/icon_cell_like}"
+            tools:icon="@drawable/icon_cell_liked"
+            tools:text="1000"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textSize="@dimen/sp_14"
+            app:iconGravity="textStart"
+            app:iconPadding="@dimen/dp_4"
+            app:backgroundTint="@color/white"
+            android:text="踩"
+            android:textColor="@{feed.ugc.hasdiss?@color/color_theme:@color/color_3d3}"
+            app:icon="@{feed.ugc.hasdiss?@drawable/icon_cell_dissed:@drawable/icon_cell_diss}"
+            tools:icon="@drawable/icon_cell_dissed"
+            tools:text="踩"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textSize="@dimen/sp_14"
+            app:iconGravity="textStart"
+            app:iconPadding="@dimen/dp_4"
+            app:backgroundTint="@color/white"
+            android:text="@{feed.ugc.commentCount>0?StringConvert.convertFeedUgc(feed.ugc.commentCount):null}"
+            android:textColor="@color/color_3d3"
+            app:icon="@drawable/icon_cell_comment"
+            tools:icon="@drawable/icon_cell_comment"
+            tools:text="1000"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textSize="@dimen/sp_14"
+            app:iconGravity="textStart"
+            app:iconPadding="@dimen/dp_4"
+            app:backgroundTint="@color/white"
+            android:text="@{feed.ugc.shareCount>0?StringConvert.convertFeedUgc(feed.ugc.shareCount):null}"
+            android:textColor="@color/color_3d3"
+            app:icon="@drawable/icon_cell_share"
+            tools:icon="@drawable/icon_cell_share"
+            tools:text="1000"/>
+    </LinearLayout>
+</layout>

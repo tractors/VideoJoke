@@ -23,6 +23,14 @@ class ApiService {
             this.mConvert = convert?:JsonConvert<T>()
         }
 
+        fun  <T> get(url : String) :GetRequest<T>{
+            return GetRequest(mBaseUrl + url)
+        }
+
+        fun <T> post(url: String) : PostRequest<T>{
+            return PostRequest(mBaseUrl + url)
+        }
+
         /**
          * 静态初始化
          */

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="comment"
+            type="com.will.videojoke.model.Comment" />
+        <import type="android.text.TextUtils"/>
+        <import type="android.view.View"/>
+        <import type="com.will.videojoke.utils.StringConvert"/>
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/dp_10"
+        android:paddingEnd="@dimen/dp_10"
+        android:paddingBottom="@dimen/dp_10"
+        android:layout_marginStart="@dimen/dp_16"
+        android:layout_marginEnd="@dimen/dp_16"
+        android:background="@color/color_gray2">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp_60"
+            android:layout_gravity="right|top"
+            android:src="@drawable/icon_god_comment2"
+            android:layout_marginEnd="@dimen/dp_10" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_20"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/dp_10">
+
+                <com.will.libcommon.view.PPImageView
+                    android:id="@+id/avatar"
+                    android:layout_width="@dimen/dp_20"
+                    android:layout_height="@dimen/dp_20"
+                    image_url="@{comment.author.avatar}"
+                    isCircle="@{true}"
+                    tools:src="@mipmap/ic_launcher_round" />
+
+                <TextView
+                    android:id="@+id/user_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dp_20"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@color/color_3d3"
+                    android:textSize="@dimen/sp_12"
+                    android:text="@{comment.author.name}"
+                    tools:text="孙菲菲发顺丰" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="1px"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/sp_12"
+                    android:textColor="@{comment.ugc.hasLiked?@color/color_theme:@color/color_3d3}"
+                    tools:text="@{comment.ugc.likeCount>0?StringConvert.convertFeedUgc(comment.ugc.likeCount):null}" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/dp_2"
+                    android:layout_marginEnd="@dimen/dp_4"
+                    android:src="@{comment.ugc.hasLiked?@drawable/icon_cell_liked:@drawable/icon_cell_like}"
+                    tools:src="@drawable/icon_cell_liked" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/dp_36"
+                android:layout_marginTop="@dimen/dp_10"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:text="@{comment.commentText}"
+                android:textColor="@color/color_3d3"
+                android:textSize="@dimen/sp_14"
+                android:visibility="@{TextUtils.isEmpty(comment.commentText)? View.GONE : View.VISIBLE}"
+                tools:text="放松放松李尖尖" />
+
+            <FrameLayout
+                android:layout_width="@dimen/dp_80"
+                android:layout_height="@dimen/dp_80"
+                android:layout_marginTop="@dimen/dp_10">
+
+                <com.will.libcommon.view.PPImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:background="@color/color_theme_10"
+                    app:image_url="@{comment.imageUrl}"
+                    app:isCircle="@{false}"
+                    tools:src="@mipmap/ic_launcher" />
+
+                <ImageView
+                    android:layout_width="@dimen/dp_20"
+                    android:layout_height="@dimen/dp_20"
+                    android:layout_gravity="center"
+                    android:visibility="@{comment.commentType == 2?View.VISIBLE:View.GONE}"
+                    android:src="@drawable/icon_video_play" />
+            </FrameLayout>
+        </LinearLayout>
+    </FrameLayout>
+</layout>
