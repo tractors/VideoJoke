@@ -22,7 +22,7 @@ abstract class Request<T,R : Request<T,R>> (private var mUrl : String) : Cloneab
     private  var cacheKey : String? = null
     private var mType: Type? = null
     private var mClazz : Class<*>? = null
-    private var mCacheStartegy: Int = NET_ONLY;
+    private var mCacheStrategy: Int = NET_ONLY
 
     companion object{
         //只访问缓存，即便本地缓存存不存在，也不会发起网络请求
@@ -71,7 +71,7 @@ abstract class Request<T,R : Request<T,R>> (private var mUrl : String) : Cloneab
     }
 
     fun cacheStrategy(@CacheStrategy cacheStrategy: Int): R {
-        mCacheStartegy = cacheStrategy
+        mCacheStrategy = cacheStrategy
         return this as R
     }
 
@@ -98,7 +98,7 @@ abstract class Request<T,R : Request<T,R>> (private var mUrl : String) : Cloneab
      */
     fun execute():ApiResponse<T>{
 
-        if (mCacheStartegy == CACHE_ONLY){
+        if (mCacheStrategy == CACHE_ONLY){
             return readCache()
         }
         val response = getCall().execute()
@@ -112,14 +112,14 @@ abstract class Request<T,R : Request<T,R>> (private var mUrl : String) : Cloneab
     fun execute(callback: JsonCallback<T>){
 
         when{
-            mCacheStartegy != NET_ONLY -> {
+            mCacheStrategy != NET_ONLY -> {
                 //异步读取缓存
                 ArchTaskExecutor.getIOThreadExecutor().execute {
                     val response: ApiResponse<T> = readCache()
                     callback?.onCacheSuccess(response)
                 }
             }
-            mCacheStartegy != CACHE_ONLY ->{
+            mCacheStrategy != CACHE_ONLY ->{
                 //发起异步网络请求
                 getCall().enqueue(object : Callback{
                     override fun onFailure(call: Call, e: IOException) {
@@ -199,7 +199,7 @@ abstract class Request<T,R : Request<T,R>> (private var mUrl : String) : Cloneab
         result.message = message
         result.status = status
 
-        if (mCacheStartegy != NET_ONLY && result.success && result.body != null && result.body is Serializable){
+        if (mCacheStrategy != NET_ONLY && result.success && result.body != null && result.body is Serializable){
             saveCache(result.body as T)
         }
         return result

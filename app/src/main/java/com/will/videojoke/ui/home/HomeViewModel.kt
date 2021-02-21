@@ -15,6 +15,7 @@ import com.will.libnetwork.JsonCallback
 import com.will.libnetwork.Request
 import com.will.videojoke.model.Feed
 import com.will.videojoke.ui.AbsViewModel
+import com.will.videojoke.ui.MutableDataSource
 import java.util.*
 import java.util.concurrent.atomic.AtomicBoolean
 import kotlin.collections.ArrayList
@@ -38,7 +39,6 @@ class HomeViewModel : AbsViewModel<Int,Feed>() {
     fun setFeedType(feedType : String){
         mFeedType = feedType
     }
-
 
     /**
      * 创建 DataSource<Key,Value> 数据源：
@@ -94,7 +94,12 @@ class HomeViewModel : AbsViewModel<Int,Feed>() {
             //读取缓存
             request.execute(object : JsonCallback<List<Feed>>(){
                 override fun onCacheSuccess(response: ApiResponse<List<Feed>>) {
-                    Log.e("onCacheSuccess：", "onCacheSuccess ${response.body?.size}")
+                    Log.e("loadData：", "onCacheSuccess ${response.body?.size}")
+                    val body = response.body
+                    val dataSource = MutableDataSource<Int,Feed>()
+                    dataSource.data.addAll(body!!)
+                    val pageList = dataSource.buildNewPageList(config)
+                    cacheLiveData.postValue(pageList)
                 }
             })
         }
@@ -121,6 +126,8 @@ class HomeViewModel : AbsViewModel<Int,Feed>() {
             boundaryPageData.postValue(true)
             loadAfter.set(false)
         }
+
+        Log.e("loadData", "loadData: key : $key")
     }
 
     @SuppressLint("RestrictedApi")

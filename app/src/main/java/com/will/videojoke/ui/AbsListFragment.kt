@@ -36,7 +36,7 @@ abstract class AbsListFragment<V,M:AbsViewModel<Int,V>> : Fragment(), OnRefreshL
 
     var mViewModel: M? = null
 
-    private var mAdapter : PagedListAdapter<V, RecyclerView.ViewHolder>? = null
+    var mAdapter : PagedListAdapter<V, RecyclerView.ViewHolder>? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,

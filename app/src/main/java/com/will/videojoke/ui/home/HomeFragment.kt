@@ -1,21 +1,17 @@
 package com.will.videojoke.ui.home
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
+import androidx.paging.ItemKeyedDataSource
+import androidx.paging.PagedList
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.scwang.smartrefresh.layout.api.RefreshLayout
 import com.will.libnavannotation.FragmentDestination
-import com.will.libnetwork.ApiService
-import com.will.videojoke.R
 import com.will.videojoke.model.Feed
 import com.will.videojoke.ui.AbsListFragment
+import com.will.videojoke.ui.MutableDataSource
 
 @FragmentDestination(pageUrl = "main/tabs/home",asStarter = true)
 class HomeFragment : AbsListFragment<Feed,HomeViewModel>() {
@@ -26,7 +22,9 @@ class HomeFragment : AbsListFragment<Feed,HomeViewModel>() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+        mViewModel?.cacheLiveData?.observe(viewLifecycleOwner,Observer<PagedList<Feed>>{t ->
+            if (t != null) submitList(t)
+        })
         mViewModel?.mFeedType = mFeedType
     }
 
@@ -60,6 +58,19 @@ class HomeFragment : AbsListFragment<Feed,HomeViewModel>() {
     }
 
     override fun onLoadMore(refreshLayout: RefreshLayout) {
+        val feed = mAdapter!!.currentList?.get(mAdapter!!.itemCount-1)
+        if (feed != null){
+            mViewModel?.loadAfter(feed!!.id,object : ItemKeyedDataSource.LoadCallback<Feed>(){
+                override fun onResult(data: MutableList<Feed>) {
+                    val dataSource = MutableDataSource<Int,Feed>()
+                    dataSource.data.addAll(data)
+                    val config :PagedList.Config = mAdapter!!.currentList!!.config
+                    val pagedList = dataSource.buildNewPageList(config)
+                    submitList(pagedList)
+                }
+
+            })
+        }
 
     }
 

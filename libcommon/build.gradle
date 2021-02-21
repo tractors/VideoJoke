@@ -63,10 +63,10 @@ dependencies {
     api ("com.alibaba:fastjson:1.2.73")
     //网络库
 
-    api("com.squareup.okhttp3:okhttp:4.9.0")
-    api("com.squareup.okhttp3:logging-interceptor:4.4.0")
-//    api 'com.squareup.okhttp3:okhttp:4.2.0'
-//    api 'com.squareup.okhttp3:logging-interceptor:3.5.0'
+//    api("com.squareup.okhttp3:okhttp:4.9.0")
+//    api("com.squareup.okhttp3:logging-interceptor:4.4.0")
+    api 'com.squareup.okhttp3:okhttp:4.2.0'
+    api 'com.squareup.okhttp3:logging-interceptor:3.5.0'
 
 
     //页面刷新组件
