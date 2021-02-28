@@ -6,7 +6,7 @@
         <variable
             name="feed"
             type="Feed" />
-        <import type="com.will.videojoke.model.Feed"/>
+        <import type="com.mooc.ppjoke.model.Feed"/>
     </data>
 
     <LinearLayout
@@ -24,7 +24,7 @@
 
         <!--        图片和视频-->
         <!--图片区域-->
-        <com.will.videojoke.ui.view.ListPlayerView
+        <com.mooc.ppjoke.ui.view.ListPlayerView
             android:id="@+id/list_player_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

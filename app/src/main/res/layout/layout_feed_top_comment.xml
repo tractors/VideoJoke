@@ -6,10 +6,10 @@
     <data>
         <variable
             name="comment"
-            type="com.will.videojoke.model.Comment" />
+            type="com.mooc.ppjoke.model.Comment" />
         <import type="android.text.TextUtils"/>
         <import type="android.view.View"/>
-        <import type="com.will.videojoke.utils.StringConvert"/>
+        <import type="com.mooc.ppjoke.utils.StringConvert"/>
     </data>
 
     <FrameLayout
@@ -40,7 +40,7 @@
                 android:orientation="horizontal"
                 android:layout_marginTop="@dimen/dp_10">
 
-                <com.will.libcommon.view.PPImageView
+                <com.mooc.libcommon.view.PPImageView
                     android:id="@+id/avatar"
                     android:layout_width="@dimen/dp_20"
                     android:layout_height="@dimen/dp_20"
@@ -97,7 +97,7 @@
                 android:layout_height="@dimen/dp_80"
                 android:layout_marginTop="@dimen/dp_10">
 
-                <com.will.libcommon.view.PPImageView
+                <com.mooc.libcommon.view.PPImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"

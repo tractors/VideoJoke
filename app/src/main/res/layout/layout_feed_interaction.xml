@@ -7,8 +7,8 @@
         <variable
             name="feed"
             type="Feed" />
-        <import type="com.will.videojoke.model.Feed"/>
-        <import type="com.will.videojoke.utils.StringConvert"/>
+        <import type="com.mooc.ppjoke.model.Feed"/>
+        <import type="com.mooc.ppjoke.utils.StringConvert"/>
     </data>
 
     <LinearLayout

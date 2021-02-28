@@ -9,7 +9,7 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "com.will.videojoke"
+        applicationId "com.mooc.ppjoke"
         minSdkVersion 21
         targetSdkVersion 30
         versionCode 1

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="com.will.videojoke.model.User"/>
+        <import type="com.mooc.ppjoke.model.User"/>
         <variable
             name="user"
             type="User" />
